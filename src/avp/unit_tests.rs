@@ -25,14 +25,12 @@ fn two_plus_two() {
 fn new__non_existent_file_causes_error() {
     // Given
     let non_existent_file = "fakefile.yml".as_ref();
-    let expected = Error::IoError(IoError::new(ErrorKind::NotFound, "n/a").into());
 
     // When
-    let actual = Avp::new(non_existent_file);
+    let actual = Location::new(non_existent_file);
 
     // Then
-    assert_eq!(discriminant(&actual.unwrap_err().into()), discriminant(&expected));
-    assert!(actual.is_err())
+    assert!(actual.is_err());
 }
 
 #[test]
@@ -41,9 +39,8 @@ fn new__existing_file_succeeds() {
     let temp_file = tempfile::NamedTempFile::new().unwrap();
 
     // When -
-    let result = Avp::new(temp_file.path());
+    let result = Location::new(temp_file.path());
 
     // Then
     assert!(result.is_ok());
-
 }

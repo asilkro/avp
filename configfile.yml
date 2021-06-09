@@ -6,3 +6,5 @@ locations:
     distance: 250
   - climate: Warm
     distance: 350
+  - climate: Cold
+    distance: 800

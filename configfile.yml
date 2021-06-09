@@ -1,3 +1,8 @@
 ---
-- climate: Moderate
-  distance: 500
+locations:
+  - climate: Moderate
+    distance: 500
+  - climate: Hot
+    distance: 250
+  - climate: Warm
+    distance: 350

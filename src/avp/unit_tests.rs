@@ -31,12 +31,15 @@ fn new__empty_existing_file_succeeds() {
     assert!(result.unwrap().is_empty());
 
 }
-
+//
 // #[test]
 // fn new__invalid_file_returns_error() {
-//     // Given - empty file
-//     let invalid_file =
-//     // When - an empty file is read
+//     // Given - broken file (it's a .png not a YML file)
+//     let invalid_file = "bad-configfile.yml".as_ref();
 //
-//     // Then -
+//     // When - a broken file is attempted
+//     let sut = Locations::new(invalid_file).unwrap();
+//
+//     // Then
+//     assert_eq!(sut.is_ok(), "{:?}", "{}");
 // }

@@ -14,7 +14,7 @@ pub struct Location {
 //YAGNI - You ain't gonna need it
 //DRY - Don't Repeat Yourself
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize,)]
 pub struct Locations {
     locations: Vec<Location>,
 }
@@ -24,7 +24,7 @@ impl Locations {
         let reader = File::open(path)?;
         // let locs = serde_yaml::from_reader(reader)?;
         let locs = match reader.metadata()?.len() {
-            0 => Self {locations: Vec::new()}, // if 0 do this
+            0 => Self { locations: Vec::new() }, // if 0 do this
             _ => serde_yaml::from_reader(reader)? // else, do that
         };
         Ok(locs)
@@ -37,4 +37,8 @@ impl Locations {
     pub fn len(&self) -> usize {
         self.locations.len()
     }
+
+    // What I tried adding on my own
+
+    pub fn is_ok(self) -> Self {self}
 }

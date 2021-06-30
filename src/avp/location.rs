@@ -1,9 +1,8 @@
 use crate::{avp::climate::Climate, Result};
 use std::path::Path;
 use std::fs::File;
-use std::fs::Metadata;
 use serde::{Serialize, Deserialize};
-use serde_yaml;
+use std::io::Read;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Location {
@@ -20,8 +19,7 @@ pub struct Locations {
 }
 
 impl Locations {
-    pub fn new(path: &Path) -> Result<Self> {
-        let reader = File::open(path)?;
+    pub fn new<TReader: Read>(reader: TReader) -> Result<Self> {
         // let locs = serde_yaml::from_reader(reader)?;
         let locs = match reader.metadata()?.len() {
             0 => Self { locations: Vec::new() }, // if 0 do this
@@ -38,7 +36,4 @@ impl Locations {
         self.locations.len()
     }
 
-    // What I tried adding on my own
-
-    pub fn is_ok(self) -> Self {self}
 }

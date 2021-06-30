@@ -5,7 +5,7 @@ use super::*;
 use std::io::{Error as IoError, ErrorKind};
 use std::fs;
 
-#[test]
+#[test] //TODO: Fix test
 fn new__non_existent_file_causes_error() {
     // Given
     let non_existent_file = "fakefile.yml".as_ref();
@@ -17,7 +17,7 @@ fn new__non_existent_file_causes_error() {
     assert!(actual.is_err());
 }
 
-#[test]
+#[test] //TODO: Fix test
 fn new__empty_existing_file_succeeds() {
     // Given
     let temp_file = tempfile::NamedTempFile::new().unwrap();
@@ -31,15 +31,16 @@ fn new__empty_existing_file_succeeds() {
     assert!(result.unwrap().is_empty());
 
 }
-//
-// #[test]
-// fn new__invalid_file_returns_error() {
-//     // Given - broken file (it's a .png not a YML file)
-//     let invalid_file = "bad-configfile.yml".as_ref();
-//
-//     // When - a broken file is attempted
-//     let sut = Locations::new(invalid_file).unwrap();
-//
-//     // Then
-//     assert_eq!(sut.is_ok(), "{:?}", "{}");
-// }
+
+#[test]
+fn new__invalid_file_returns_error() {
+    // Given - broken file (it's a .png not a YML file)
+    let invalid_file = [0x2e_u8, 0x5c, 0x62, 0x61];
+
+    // When - a broken file is attempted
+    let result = Locations::new(invalid_file);
+
+    // Then
+    assert!(result.is_ok(), "{:?}", result);
+}
+

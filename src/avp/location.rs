@@ -20,11 +20,7 @@ pub struct Locations {
 
 impl Locations {
     pub fn new<TReader: Read>(reader: TReader) -> Result<Self> {
-        // let locs = serde_yaml::from_reader(reader)?;
-        let locs = match reader.metadata()?.len() {
-            0 => Self { locations: Vec::new() }, // if 0 do this
-            _ => serde_yaml::from_reader(reader)? // else, do that
-        };
+        let locs = serde_yaml::from_reader(reader)?;
         Ok(locs)
     }
 

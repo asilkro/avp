@@ -18,20 +18,20 @@ use std::fs;
 // }
 
 //TODO: Fix implementation to support empty Reader
-// #[test]
-// fn new__empty_existing_file_succeeds() {
-//     // Given
-//     let temp_file = tempfile::NamedTempFile::new().unwrap();
-//
-//     // When -
-//     let result = Locations::new(temp_file);
-//
-//     // Then
-//     // Unwrap for test only, plz no ship
-//     assert!(result.is_ok(), "{:?}", result);
-//     assert!(result.unwrap().is_empty());
-//
-// }
+#[test]
+ fn new__empty_existing_file_succeeds() {
+     // Given
+     let temp_file = tempfile::NamedTempFile::new().unwrap();
+
+     // When -
+     let result = Locations::new(temp_file);
+
+     // Then
+     // Unwrap for test only, plz no ship
+     assert!(result.is_ok(), "{:?}", result);
+     assert!(result.unwrap().is_empty());
+
+ }
 
 #[test]
 fn new__invalid_file_returns_error() {

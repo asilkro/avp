@@ -19,17 +19,26 @@ pub struct Locations {
 }
 
 impl Locations {
-    pub fn new<TReader: Read>(reader: TReader) -> Result<Self> {
-        let locs = serde_yaml::from_reader(reader)?;
+    pub fn new<TRead>(reader: TRead) -> Result<Self> where TRead: Read {
+        // Read data into memory (allows us to check if reader is empty before
+        // we try to deserialize it into a `Locations` instance.)
+        let data = {
+            let mut tmp = Vec::new();
+            reader.read_to_end(&mut tmp)?;
+            tmp
+        };
+        // Check if we have any data:
+        let locs = match data.len() {
+            // No data read; `reader` was empty, so return an empty `Locations`.
+            // Note `serde_yaml` would have errored in this situation, so by
+            // pre-screening for it, we can ensure when `serde_yaml` returns an
+            // error, it's not because the `Reader` was empty.
+            0 => Locations(Vec::new()),
+            // Data was read.  Attempt to deserialize it as a `Locations`
+            // instance.  If `serde_yaml` errors, then we know it was an error
+            // we consider legitimate, so return it as such.
+            _ => serde_yaml::from_slice(data.as_ref())?,
+        };
         Ok(locs)
     }
-
-    pub fn is_empty(&self) -> bool {
-        self.len() == 0
-    }
-
-    pub fn len(&self) -> usize {
-        self.locations.len()
-    }
-
 }

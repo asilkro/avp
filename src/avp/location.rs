@@ -1,6 +1,5 @@
 use crate::{avp::climate::Climate, Result};
-use std::path::Path;
-use std::fs::File;
+
 use serde::{Serialize, Deserialize};
 use std::io::Read;
 
@@ -19,7 +18,7 @@ pub struct Locations {
 }
 
 impl Locations {
-    pub fn new<TRead>(reader: TRead) -> Result<Self> where TRead: Read {
+    pub fn new<TRead>(mut reader: TRead) -> Result<Self> where TRead: Read {
         // Read data into memory (allows us to check if reader is empty before
         // we try to deserialize it into a `Locations` instance.)
         let data = {
@@ -33,12 +32,17 @@ impl Locations {
             // Note `serde_yaml` would have errored in this situation, so by
             // pre-screening for it, we can ensure when `serde_yaml` returns an
             // error, it's not because the `Reader` was empty.
-            0 => Locations(Vec::new()),
+            0 => Locations { locations: Vec::new() },
             // Data was read.  Attempt to deserialize it as a `Locations`
             // instance.  If `serde_yaml` errors, then we know it was an error
             // we consider legitimate, so return it as such.
             _ => serde_yaml::from_slice(data.as_ref())?,
         };
         Ok(locs)
+    }
+    pub fn is_empty(&self) -> bool {
+        self.locations.is_empty()
+        // locations is our data store so if it's empty, we know it has to be empty
+        // the vec of Location already implements is_empty so we can reuse
     }
 }

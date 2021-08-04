@@ -17,7 +17,6 @@ use std::fs;
 //     assert!(actual.is_err());
 // }
 
-// TODO: Fix implementation to support empty Reader
 #[test]
  fn new__empty_existing_file_succeeds() {
      // Given

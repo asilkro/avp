@@ -2,8 +2,10 @@
 locations:
   - climate: Moderate
     distance: 500
+    visited: Yes
   - climate: Hot
     distance: 250
+    visited: No
   - climate: Warm
     distance: 350
   - climate: Cold

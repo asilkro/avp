@@ -2,11 +2,13 @@ use crate::{avp::climate::Climate, Result};
 
 use serde::{Serialize, Deserialize};
 use std::io::Read;
+use crate::avp::visited::Visited;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Location {
     climate: Climate,
     distance: u32,
+    visited: Visited,
 }
 
 //YAGNI - You ain't gonna need it

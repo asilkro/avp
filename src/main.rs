@@ -3,7 +3,7 @@ mod error;
 
 use avp::Locations;
 use std::path::Path;
-use error::{Error, Result};
+use error::Result;
 use std::fs::{File};
 
 

@@ -1,10 +1,14 @@
-use crate::{avp::climate::Climate, Result};
-
-use serde::{Serialize, Deserialize};
 use std::io::Read;
+
+use serde::{Deserialize, Serialize};
+
+use crate::{avp::climate::Climate, Result};
 use crate::avp::visited::Visited;
 
-#[derive(Debug, Serialize, Deserialize)]
+#[cfg(test)]
+mod unit_tests;
+
+#[derive(Debug, Serialize, Deserialize, PartialEq)]
 pub struct Location {
     climate: Climate,
     distance: u32,
@@ -14,7 +18,7 @@ pub struct Location {
 //YAGNI - You ain't gonna need it
 //DRY - Don't Repeat Yourself
 
-#[derive(Debug, Serialize, Deserialize,)]
+#[derive(Debug, Serialize, Deserialize, PartialEq)]
 pub struct Locations {
     locations: Vec<Location>,
 }
@@ -42,6 +46,7 @@ impl Locations {
         };
         Ok(locs)
     }
+    #[allow(dead_code)]
     pub fn is_empty(&self) -> bool {
         self.locations.is_empty()
         // locations is our data store so if it's empty, we know it has to be empty

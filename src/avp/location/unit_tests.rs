@@ -9,6 +9,9 @@ use crate::{
     error::Error,
     avp::visited::Visited
 };
+use test::assert_test_result;
+use std::ptr::read;
+use serde_yaml::from_slice;
 
 // #[test] // This case is no longer possible to test
 // fn new__non_existent_file_causes_error() {
@@ -50,7 +53,7 @@ fn new__invalid_data_returns_error() {
 }
 
 #[test]
-fn new__reader_valid_data_parses_successfully() {
+fn new__reader_valid_data_parses_successfully_fragile() {
     // Given
     let data_being_read = r"---
     locations:
@@ -72,4 +75,19 @@ fn new__reader_valid_data_parses_successfully() {
     // Then
     assert!(result.is_ok(),"{:?}", result);
     assert_eq!(result.unwrap(), expected);
+}
+// TODO: Make a test that implements in a less "copy and paste your data in" way
+#[test]
+fn new__reader_valid_data_parses_successfully_robust() {
+    // Given
+    // let data_being_read = something_that_implements_read; // No
+    let data_being_read = Locations::open(some_source.as_bytes());
+    let expected = the_thing_being_read_above_in_another_format;
+
+    // When
+    let result = data_being_read(&mut self, buf: &mut Vec<u8>);
+
+    // Then
+    assert_eq!(result.unwrap(), expected)
+
 }

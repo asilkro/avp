@@ -46,10 +46,31 @@ impl Locations {
         };
         Ok(locs)
     }
+
+    // TODO: I want a way to open a thing; we already have new ^^ above but I want something else to implement read.
+    //  The thing I'm making will go below here.
+    //
+    // pub fn open()
+    // }
+
+
+
     #[allow(dead_code)]
     pub fn is_empty(&self) -> bool {
         self.locations.is_empty()
         // locations is our data store so if it's empty, we know it has to be empty
         // the vec of Location already implements is_empty so we can reuse
+    }
+}
+
+// TODO: Constructors / Accessors
+
+pub fn get {
+    return Locations(Location);
+}
+
+pub fn set {
+    SetLocation{
+        Locations.Add(Location);
     }
 }

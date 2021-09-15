@@ -13,18 +13,6 @@ use test::assert_test_result;
 use std::ptr::read;
 use serde_yaml::from_slice;
 
-// #[test] // This case is no longer possible to test
-// fn new__non_existent_file_causes_error() {
-//     // Given
-//     let non_existent_file = "fakefile.yml".as_ref();
-//
-//     // When
-//     let actual = Locations::new(non_existent_file);
-//
-//     // Then
-//     assert!(actual.is_err());
-// }
-
 #[test]
  fn new__empty_reader_succeeds() {
      // Given

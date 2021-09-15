@@ -2,7 +2,7 @@
 
 use std::mem::discriminant;
 use crate::avp::*;
-use std::io::{Error as IoError, ErrorKind};
+use std::io::{Error as IoError, ErrorKind, Stdin, Read};
 use std::fs;
 use crate::{
     avp::climate::Climate,
@@ -68,13 +68,13 @@ fn new__reader_valid_data_parses_successfully_fragile() {
 #[test]
 fn new__reader_valid_data_parses_successfully_robust() {
     // Given
-    let data_being_read = Locations::open(something.to_bytes());
+    let data_being_read = Stdin::read_to_end(data_contents.as_bytes());
     let expected = the_thing_being_read_above_in_another_format;
 
     // When
     let result = data_being_read(&mut self, buf: &mut Vec<u8>);
 
     // Then
-    assert_eq!(result.unwrap(), expected)
-
+    assert!(result.is_ok(),"{:?}", result);
+    assert_eq!(result.unwrap(), expected);
 }

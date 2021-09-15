@@ -15,6 +15,18 @@ pub struct Location {
     visited: Visited,
 }
 
+impl Location {
+    pub fn climate(&self) -> &Climate {
+        &self.climate
+    }
+    pub fn distance(&self) -> u32 {
+        self.distance
+    }
+    pub fn visited(&self) -> &Visited {
+        &self.visited
+    }
+}
+
 //YAGNI - You ain't gonna need it
 //DRY - Don't Repeat Yourself
 
@@ -63,14 +75,14 @@ impl Locations {
     }
 }
 
-// TODO: Constructors / Accessors for updating
-//
-// pub fn get {
-//     return Locations(Location);
-// }
-//
-// pub fn set {
-//     SetLocation{
-//         Locations.Add(Location);
-//     }
-// }
+//TODO: Constructors / Accessors for updating
+
+pub fn location(){
+    return Location(Location);
+}
+
+pub fn set_location(){
+    SetLocation{
+        Location::add(Location);
+    }
+}

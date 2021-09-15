@@ -6,13 +6,13 @@ pub enum Climate {
     Cold, Hot, Moderate, Warm
 }
 // TODO: Constructors / Accessors for updating
-//
-// pub fn get {
-//     return Climate(Location);
-// }
-//
-// pub fn set {
+
+
+// pub fn set_climate(){
 //     SetClimate{
 //         climate.Add(Location);
 //     }
 // }
+pub fn climate(&self) -> &Climate {
+    &self.climate
+}

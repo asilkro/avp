@@ -7,12 +7,12 @@ pub enum Visited {
 }
 // TODO: Constructors / Accessors for updating
 
-// pub fn get {
-//     return Visited(Location);
-// }
-//
-// pub fn set {
-//     SetVisited{
-//         Visited.Add(Location);
-//     }
-// }
+pub fn visited(){
+    return Visited(Location);
+}
+
+pub fn set_visited(){
+    SetVisited{
+        Visited.Add(Location);
+    }
+}

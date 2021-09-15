@@ -5,14 +5,14 @@ use crate::avp::Location;
 pub enum Climate {
     Cold, Hot, Moderate, Warm
 }
-// TODO: Constructors / Accessors
-
-pub fn get {
-    return Climate(Location);
-}
-
-pub fn set {
-    SetClimate{
-        climate.Add(Location);
-    }
-}
+// TODO: Constructors / Accessors for updating
+//
+// pub fn get {
+//     return Climate(Location);
+// }
+//
+// pub fn set {
+//     SetClimate{
+//         climate.Add(Location);
+//     }
+// }

@@ -5,14 +5,14 @@ use crate::avp::Location;
 pub enum Visited {
     Yes, No
 }
-// TODO: Constructors / Accessors
+// TODO: Constructors / Accessors for updating
 
-pub fn get {
-    return Visited(Location);
-}
-
-pub fn set {
-    SetVisited{
-        Visited.Add(Location);
-    }
-}
+// pub fn get {
+//     return Visited(Location);
+// }
+//
+// pub fn set {
+//     SetVisited{
+//         Visited.Add(Location);
+//     }
+// }

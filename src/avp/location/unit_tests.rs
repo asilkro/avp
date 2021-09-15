@@ -80,8 +80,7 @@ fn new__reader_valid_data_parses_successfully_fragile() {
 #[test]
 fn new__reader_valid_data_parses_successfully_robust() {
     // Given
-    // let data_being_read = something_that_implements_read; // No
-    let data_being_read = Locations::open(some_source.as_bytes());
+    let data_being_read = Locations::open(something.to_bytes());
     let expected = the_thing_being_read_above_in_another_format;
 
     // When

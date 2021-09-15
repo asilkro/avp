@@ -63,14 +63,14 @@ impl Locations {
     }
 }
 
-// TODO: Constructors / Accessors
-
-pub fn get {
-    return Locations(Location);
-}
-
-pub fn set {
-    SetLocation{
-        Locations.Add(Location);
-    }
-}
+// TODO: Constructors / Accessors for updating
+//
+// pub fn get {
+//     return Locations(Location);
+// }
+//
+// pub fn set {
+//     SetLocation{
+//         Locations.Add(Location);
+//     }
+// }

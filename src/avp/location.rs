@@ -19,6 +19,7 @@ impl Location {
     pub fn climate(&self) -> &Climate {
         &self.climate
     }
+
     pub fn distance(&self) -> u32 {
         self.distance
     }
@@ -76,13 +77,3 @@ impl Locations {
 }
 
 //TODO: Constructors / Accessors for updating
-
-pub fn location(){
-    return Location(Location);
-}
-
-pub fn set_location(){
-    SetLocation{
-        Location::add(Location);
-    }
-}

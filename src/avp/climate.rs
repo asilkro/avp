@@ -38,12 +38,17 @@ struct Cold {
     climate : cold
 }
 
+// Accessor goes here
 pub fn climate() {
     match climate_type() {
         Cold => Climate::Cold,
         Moderate => Climate::Moderate,
         Warm => Climate::Warm,
         Hot => Climate::Hot,
-        _ => println!("Error, choose Cold, Moderate, Warm or Hot"),
     };
+}
+
+// Setter goes here
+pub fn set_climate() {
+    // I know I want to separate the climate part from the serde part
 }

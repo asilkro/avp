@@ -1,12 +1,14 @@
 use serde::{Serialize, Deserialize};
 use crate::avp::Location;
+use std::fs::read;
 
 #[derive(Debug, Serialize, Deserialize, PartialEq)]
 pub enum Visited {
     Yes, No
 }
-// TODO: Constructors / Accessors for updating
 
+
+// Do I even need these structs?
 struct Yes {
     visited : yes
 }
@@ -15,11 +17,16 @@ struct No {
     visited : no
 }
 
-// First shot an
+// TODO: Constructors / Accessors for updating
+
+// Accessor goes here
 pub fn visited() {
     match visited_response() {
         Yes => Visited::Yes,
         No => Visited::No,
-        _ => println!("Error, choose Yes or No"),
     };
+}
+
+pub fn set_visited() {
+
 }

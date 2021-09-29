@@ -23,8 +23,21 @@ impl Location {
     pub fn distance(&self) -> u32 {
         self.distance
     }
+
     pub fn visited(&self) -> &Visited {
         &self.visited
+    }
+
+    pub fn set_climate(&mut self, climate: Climate) {
+        self.climate = climate;
+    }
+
+    pub fn set_distance(&mut self, distance: u32) {
+        self.distance = distance;
+    }
+
+    pub fn set_visited(&mut self, visited: Visited) {
+        self.visited = visited;
     }
 }
 

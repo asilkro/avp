@@ -9,7 +9,6 @@ use crate::{
     error::Error,
     avp::visited::Visited
 };
-use test::assert_test_result;
 use std::ptr::read;
 use serde_yaml::from_slice;
 
@@ -41,7 +40,7 @@ fn new__invalid_data_returns_error() {
 }
 
 #[test]
-fn new__reader_valid_data_parses_successfully_fragile() {
+fn new__valid_yaml_data_deserializes_successfully() {
     // Given
     let data_being_read = r"---
     locations:
@@ -56,23 +55,8 @@ fn new__reader_valid_data_parses_successfully_fragile() {
     }]
     };
 
-
     // When - data is being parsed
     let result = Locations::new(data_being_read.as_bytes());
-
-    // Then
-    assert!(result.is_ok(),"{:?}", result);
-    assert_eq!(result.unwrap(), expected);
-}
-// TODO: Make a test that implements in a less "copy and paste your data in" way
-#[test]
-fn new__reader_valid_data_parses_successfully_robust() {
-    // Given
-    let data_being_read = Stdin::read_to_end(data_contents.as_bytes());
-    let expected = the_thing_being_read_above_in_another_format;
-
-    // When
-    let result = data_being_read(&mut self, buf: &mut Vec<u8>);
 
     // Then
     assert!(result.is_ok(),"{:?}", result);

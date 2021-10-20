@@ -8,5 +8,7 @@ locations:
     visited: No
   - climate: Warm
     distance: 350
+    visited: No
   - climate: Cold
     distance: 800
+    visited: Yes

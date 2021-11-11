@@ -15,10 +15,10 @@ use serde_yaml::from_slice;
 #[test]
  fn new__empty_reader_succeeds() {
      // Given
-     let temp_file = tempfile::NamedTempFile::new().unwrap();
+    let data_being_read = r#""#;
 
      // When -
-     let result = Locations::new(temp_file);
+     let result = Locations::new(data_being_read.as_bytes());
 
      // Then
      // Unwrap for test only, plz no ship
@@ -42,13 +42,15 @@ fn new__invalid_data_returns_error() {
 #[test]
 fn new__valid_yaml_data_deserializes_successfully() {
     // Given
-    let data_being_read = r"---
+    let data_being_read = r#"---
     locations:
-      - climate: Moderate
+      - name: "Some Name"
+        climate: Moderate
         distance: 500
-        visited: Yes";
+        visited: Yes"#;
     let expected = Locations {
         locations: vec![Location {
+            name: String::from("Some Name"),
             climate: Climate::Moderate,
             distance: 500,
             visited: Visited::Yes,

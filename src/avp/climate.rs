@@ -1,8 +1,4 @@
 use serde::{Serialize, Deserialize};
-use crate::avp::Location;
-// use crate::avp::*;
-    // Thought about doing this
-use crate::avp::climate::Climate::{Cold, Hot, Moderate, Warm};
 
 #[derive(Debug, Serialize, Deserialize, PartialEq)]
 pub enum Climate {

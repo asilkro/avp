@@ -1,7 +1,5 @@
 use std::io::Read;
-
 use serde::{Deserialize, Serialize};
-
 use crate::{avp::climate::Climate, Result};
 use crate::avp::visited::Visited;
 
@@ -10,30 +8,37 @@ mod unit_tests;
 
 #[derive(Debug, Serialize, Deserialize, PartialEq)]
 pub struct Location {
+    name: String,
     climate: Climate,
     distance: u32,
     visited: Visited,
 }
 
 impl Location {
+    pub fn name(&self) -> &str {
+        &self.name
+    }
+
+    pub fn set_name(&mut self, name: String) {
+        self.name = name;
+    }
+
     pub fn climate(&self) -> &Climate {
         &self.climate
+    }
+    pub fn set_climate(&mut self, climate: Climate) {
+        self.climate = climate;
     }
 
     pub fn distance(&self) -> u32 {
         self.distance
     }
+    pub fn set_distance(&mut self, distance: u32) {
+        self.distance = distance;
+    }
 
     pub fn visited(&self) -> &Visited {
         &self.visited
-    }
-
-    pub fn set_climate(&mut self, climate: Climate) {
-        self.climate = climate;
-    }
-
-    pub fn set_distance(&mut self, distance: u32) {
-        self.distance = distance;
     }
 
     pub fn set_visited(&mut self, visited: Visited) {

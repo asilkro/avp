@@ -1,14 +1,18 @@
 ---
 locations:
-  - climate: Moderate
+  - name: Calgary
+    climate: Moderate
     distance: 500
     visited: Yes
-  - climate: Hot
+  - name: Flaming Spokane
+    climate: Hot
     distance: 250
     visited: No
-  - climate: Warm
+  - name: Salt Lake City
+    climate: Warm
     distance: 350
     visited: No
-  - climate: Cold
+  - name: Skagway
+    climate: Cold
     distance: 800
     visited: Yes

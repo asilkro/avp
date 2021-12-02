@@ -11,6 +11,7 @@ use crate::{
 };
 use std::ptr::read;
 use serde_yaml::from_slice;
+use crate::avp::visited::Visited::{No, Yes};
 
 #[test]
  fn new__empty_reader_succeeds() {
@@ -54,13 +55,46 @@ fn new__valid_yaml_data_deserializes_successfully() {
             climate: Climate::Moderate,
             distance: 500,
             visited: Visited::Yes,
-    }]
+        }]
     };
 
     // When - data is being parsed
     let result = Locations::new(data_being_read.as_bytes());
 
     // Then
-    assert!(result.is_ok(),"{:?}", result);
+    assert!(result.is_ok(), "{:?}", result);
     assert_eq!(result.unwrap(), expected);
 }
+
+#[test] /// Starting with visited since it's a simple enum
+fn getters_can_get_visited() {
+    // Given a location, initialized with a Yes as visited, determine if getter can accurately reflect
+    let expected_result = Yes;
+    let location_setup_data = r#"---
+    locations:
+      - name: "Some Name"
+        climate: Moderate
+        distance: 500
+        visited: Yes"#.as_bytes();
+    let locations = Locations::new(location_setup_data).unwrap();
+    let location = locations.locations.first().unwrap();
+
+    // When
+
+    let result = location.visited();
+    
+    // Then
+    assert_eq!(result, expected_result);
+}
+
+//#[test] /// Starting with visited since it's a simple enum
+//fn setters_can_set_visited() {
+//    // Given
+//    let expected_visited = Yes;
+//
+//    // When
+//    let setter_visited = Location::set_visited(&mut self,visited:Visited::No);
+//
+//    // Then
+//    assert_eq!(expected_visited, setter_visited);
+//}

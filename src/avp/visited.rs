@@ -1,12 +1,6 @@
 use serde::{Serialize, Deserialize};
 
-#[derive(Debug, Serialize, Deserialize, PartialEq)]
+#[derive(Clone, Copy, Debug, Deserialize, PartialEq, Serialize)]
 pub enum Visited {
     Yes, No
 }
-
-
-// TODO: Constructors / Accessors for updating
-
-// Accessor goes here
-

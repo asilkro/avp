@@ -37,10 +37,9 @@ impl Location {
         self.distance = distance;
     }
 
-    pub fn visited(&self) -> &Visited {
-        &self.visited
+    pub fn visited(&self) -> Visited {
+        self.visited
     }
-
     pub fn set_visited(&mut self, visited: Visited) {
         self.visited = visited;
     }
@@ -76,6 +75,7 @@ impl Locations {
             _ => serde_yaml::from_slice(data.as_ref())?,
         };
         Ok(locs)
+    // pub fn modify_location
     }
 
     // TODO: I want a way to open a thing; we already have new ^^ above but I want something else to implement read.

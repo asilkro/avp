@@ -1,3 +1,6 @@
+#![allow(dead_code)]
+// TODO: Uncomment before shipping
+// #![deny(dead_code)]
 mod avp;
 mod error;
 

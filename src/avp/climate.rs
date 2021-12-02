@@ -4,9 +4,6 @@ use serde::{Serialize, Deserialize};
 pub enum Climate {
     Cold, Hot, Moderate, Warm
 }
-// TODO: Constructors / Accessors for updating
-
-    // Constructors & accessors defined in location.rs
 
 // TODO: Make numbers be a thing that defines climate at some point
 // impl Climate {

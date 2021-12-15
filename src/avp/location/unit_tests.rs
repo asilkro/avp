@@ -4,11 +4,7 @@ use std::mem::discriminant;
 use crate::avp::*;
 use std::io::{Error as IoError, ErrorKind, Stdin, Read};
 use std::fs;
-use crate::{
-    avp::climate::Climate,
-    error::Error,
-    avp::visited::Visited
-};
+use crate::{avp::climate::Climate, error::Error, avp::visited::Visited, avp};
 use std::ptr::read;
 use serde_yaml::from_slice;
 use crate::avp::visited::Visited::{No, Yes};
@@ -87,14 +83,22 @@ fn getters_can_get_visited() {
     assert_eq!(result, expected_result);
 }
 
-//#[test] /// Starting with visited since it's a simple enum
-//fn setters_can_set_visited() {
-//    // Given
-//    let expected_visited = Yes;
-//
-//    // When
-//    let setter_visited = Location::set_visited(&mut self,visited:Visited::No);
-//
-//    // Then
-//    assert_eq!(expected_visited, setter_visited);
-//}
+#[test] /// Starting with visited since it's a simple enum
+fn setters_can_set_visited() {
+    // Given
+    let expected_result = Yes;
+    let location_setup_data = r#"---
+    locations:
+      - name: "Some Name"
+        climate: Moderate
+        distance: 500
+        visited: Yes"#.as_bytes();
+    let locations = Locations::new(location_setup_data).unwrap();
+    let location = locations.locations.first().unwrap();
+
+    // When
+    let result = location::Location::set_visited(&mut self,Yes);
+
+    // Then
+    assert_eq!(expected_result, result);
+}

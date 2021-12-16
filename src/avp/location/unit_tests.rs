@@ -7,6 +7,7 @@ use std::fs;
 use crate::{avp::climate::Climate, error::Error, avp::visited::Visited, avp};
 use std::ptr::read;
 use serde_yaml::from_slice;
+use crate::avp::climate::Climate::Moderate;
 use crate::avp::visited::Visited::{No, Yes};
 
 #[test]
@@ -92,12 +93,14 @@ fn setters_can_set_visited() {
       - name: "Some Name"
         climate: Moderate
         distance: 500
-        visited: Yes"#.as_bytes();
+        visited: No"#.as_bytes();
     let locations = Locations::new(location_setup_data).unwrap();
-    let location = locations.locations.first().unwrap();
+    let mut location = locations.locations.first().unwrap();
 
-    // When
-    let result = location::Location::set_visited(&mut self,Yes);
+   // When
+    let result = location::Location::set_visited(&mut self, visited:Yes);
+    let result2 = location.set_visited(Visited::Yes);
+
 
     // Then
     assert_eq!(expected_result, result);

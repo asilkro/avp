@@ -83,7 +83,7 @@ fn getters_can_get_visited() {
     assert_eq!(result, expected_result);
 }
 
-/*#[test] /// Starting with visited since it's a simple enum
+#[test] /// Starting with visited since it's a simple enum
 fn setters_can_set_visited() {
     // Given
     let expected_result = Yes;
@@ -97,13 +97,12 @@ fn setters_can_set_visited() {
     let mut location = locations.locations.first().unwrap();
 
    // When
-    let result = location::Location::set_visited(&mut self, visited:Yes);
-    let result2 = location.set_visited(Visited::Yes);
+    let result = location::Location::set_visited(Location { name:"Some Name".to_string(), climate: Moderate, distance: 500, visited: No }, Visited::Yes);
 
 
     // Then
     assert_eq!(expected_result, result);
-}*/
+}
 
 #[test] /// Get climate from data
 fn getters_can_get_climate(){
@@ -119,7 +118,7 @@ fn getters_can_get_climate(){
     let location = locations.locations.first().unwrap();
 
     // When
-    let result = &location.climate;
+    let result = location.climate.clone();
 
     // Then
     debug_assert_eq!(result, expected_result);

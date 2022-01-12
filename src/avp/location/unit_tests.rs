@@ -7,7 +7,7 @@ use std::fs;
 use crate::{avp::climate::Climate, error::Error, avp::visited::Visited, avp};
 use std::ptr::read;
 use serde_yaml::from_slice;
-use crate::avp::climate::Climate::Moderate;
+use crate::avp::climate::Climate::{Moderate, Warm};
 use crate::avp::visited::Visited::{No, Yes};
 
 #[test]
@@ -77,14 +77,13 @@ fn getters_can_get_visited() {
     let location = locations.locations.first().unwrap();
 
     // When
-
     let result = location.visited();
     
     // Then
     assert_eq!(result, expected_result);
 }
 
-#[test] /// Starting with visited since it's a simple enum
+/*#[test] /// Starting with visited since it's a simple enum
 fn setters_can_set_visited() {
     // Given
     let expected_result = Yes;
@@ -104,4 +103,24 @@ fn setters_can_set_visited() {
 
     // Then
     assert_eq!(expected_result, result);
+}*/
+
+#[test] /// Get climate from data
+fn getters_can_get_climate(){
+    // Given a location, initialized with a Warm as climate, determine if getter can accurately reflect
+    let expected_result = Warm;
+    let location_setup_data = r#"---
+    locations:
+      - name: "Some Name"
+        climate: Warm
+        distance: 500
+        visited: Yes"#.as_bytes();
+    let locations = Locations::new(location_setup_data).unwrap();
+    let location = locations.locations.first().unwrap();
+
+    // When
+    let result = &location.climate;
+
+    // Then
+    debug_assert_eq!(result, expected_result);
 }

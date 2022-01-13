@@ -1,5 +1,6 @@
 #![allow(non_snake_case, unused_imports)]
 
+use std::borrow::BorrowMut;
 use std::mem::discriminant;
 use crate::avp::*;
 use std::io::{Error as IoError, ErrorKind, Stdin, Read};
@@ -93,15 +94,15 @@ fn setters_can_set_visited() {
         climate: Moderate
         distance: 500
         visited: No"#.as_bytes();
-    let locations = Locations::new(location_setup_data).unwrap();
-    let mut location = locations.locations.first().unwrap();
+    let mut locations = Locations::new(location_setup_data).unwrap();
+    let location = locations.locations.first_mut().unwrap();
 
-   // When
-    let result = location::Location::set_visited(Location { name:"Some Name".to_string(), climate: Moderate, distance: 500, visited: No }, Visited::Yes);
-
+    // When
+    let updated_location = location.set_visited(Visited::Yes);
 
     // Then
-    assert_eq!(expected_result, result);
+    assert_eq!(expected_result, location.visited());
+
 }
 
 #[test] /// Get climate from data

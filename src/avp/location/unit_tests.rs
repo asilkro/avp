@@ -8,7 +8,7 @@ use std::fs;
 use crate::{avp::climate::Climate, error::Error, avp::visited::Visited, avp};
 use std::ptr::read;
 use serde_yaml::from_slice;
-use crate::avp::climate::Climate::{Moderate, Warm};
+use crate::avp::climate::Climate::{Cold, Moderate, Warm};
 use crate::avp::visited::Visited::{No, Yes};
 
 #[test]
@@ -86,7 +86,7 @@ fn getters_can_get_visited() {
 
 #[test] /// Starting with visited since it's a simple enum
 fn setters_can_set_visited() {
-    // Given
+    // Given setup values, can an updated location modify the setup value for visited
     let expected_result = Yes;
     let location_setup_data = r#"---
     locations:
@@ -102,7 +102,6 @@ fn setters_can_set_visited() {
 
     // Then
     assert_eq!(expected_result, location.visited());
-
 }
 
 #[test] /// Get climate from data
@@ -124,3 +123,22 @@ fn getters_can_get_climate(){
     // Then
     debug_assert_eq!(result, expected_result);
 }
+#[test] /// Starting with visited since it's a simple enum
+fn setters_can_set_climate(){
+    // Given setup values, can an updated location modify the setup value for climate
+    let expected_result = Cold;
+    let location_setup_data = r#"---
+    locations:
+      - name: "Some Name"
+        climate: Warm
+        distance: 500
+        visited: Yes"#.as_bytes();
+    let mut locations = Locations::new(location_setup_data).unwrap();
+    let location = locations.locations.first_mut().unwrap();
+
+    // When
+    let updated_location = location.set_climate(Climate::Cold);
+
+    // Then
+    assert_eq!(expected_result, location.climate)
+    }

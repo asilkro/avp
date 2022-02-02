@@ -123,7 +123,7 @@ fn getters_can_get_climate(){
     // Then
     debug_assert_eq!(result, expected_result);
 }
-#[test] /// Starting with visited since it's a simple enum
+#[test] /// Set Climate
 fn setters_can_set_climate(){
     // Given setup values, can an updated location modify the setup value for climate
     let expected_result = Cold;
@@ -142,3 +142,24 @@ fn setters_can_set_climate(){
     // Then
     assert_eq!(expected_result, location.climate)
     }
+
+#[test] /// Distance next
+fn getters_can_get_distance(){
+    // Given a location, initialized with 500 as distance, determine if getter can accurately reflect
+    let expected_result = 500;
+    let location_setup_data = r#"---
+    locations:
+      - name: "Some Name"
+        climate: Warm
+        distance: 500
+        visited: Yes"#.as_bytes();
+    let locations = Locations::new(location_setup_data).unwrap();
+    let location = locations.locations.first().unwrap();
+
+    // When
+    let result = location.distance;
+
+    // Then
+
+    assert_eq!(expected_result, result);
+}

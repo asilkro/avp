@@ -161,5 +161,47 @@ fn getters_can_get_distance(){
 
     // Then
 
-    assert_eq!(expected_result, result);
+    assert_eq!(result, expected_result);
+}
+//#[test] /// Set Distance
+//fn setters_can_set_distance() {
+//    // Given
+//    let expected_result = 250; // Not same as initialized
+//    let location_setup_data = r#"---
+//    locations:
+//      - name: "Some Name"
+//        climate: Warm
+//        distance: 500
+//        visited: Yes"#.as_bytes();
+//    let mut locations = Locations::new(location_setup_data).unwrap();
+//    let location = locations
+//}
+
+#[test] // How do we want to access location
+fn first_location_accessor(){
+    // Given a Locations
+    let data = r#"---
+        name: "Another Name"
+        climate: Warm
+        distance: 500
+        visited: Yes"#.as_bytes();
+    let expected_result = serde_yaml::from_slice(data.as_ref()).unwrap();
+    let location_setup_data = r#"---
+    locations:
+      - name: "Some Name"
+        climate: Cold
+        distance: 250
+        visited: No
+      - name: "Another Name"
+        climate: Warm
+        distance: 500
+        visited: Yes"#.as_bytes();
+    let locations = Locations::new(location_setup_data).unwrap();
+
+    // When
+    let result = locations.find("Another Name");
+
+    // Then
+    assert_eq!(result, Some(&expected_result));
+
 }

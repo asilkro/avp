@@ -92,6 +92,10 @@ impl Locations {
         // locations is our data store so if it's empty, we know it has to be empty
         // the vec of Location already implements is_empty so we can reuse
     }
+
+    pub fn find(&self, name:&'static str) -> Option<&Location>{
+        self.locations.iter().find(|location|location.name() == name) // Closures / Iters!
+    }
 }
 
 //TODO: Constructors / Accessors for updating

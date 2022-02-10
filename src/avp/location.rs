@@ -96,6 +96,10 @@ impl Locations {
     pub fn find(&self, name:&'static str) -> Option<&Location>{
         self.locations.iter().find(|location|location.name() == name) // Closures / Iters!
     }
+
+    pub fn robust_find(&self, ) -> Option<&Location>{
+        self.locations.iter().find(|location:&&Location|location)
+    }
 }
 
 //TODO: Constructors / Accessors for updating

@@ -204,4 +204,18 @@ fn first_location_accessor(){
     // Then
     assert_eq!(result, Some(&expected_result));
 
+    #[test] // Robust find can use any parameter, this tests with Visited
+    fn robust_find_can_use_visited() {
+        // Given
+
+        // When
+        // name, climate, distance, name
+        let result = locations.find_robust("<some_str>", Climate::<some_variant>, 1..=10, Visited::<some_variant>);
+
+        // future code looks like
+        fn find_robust(&self, name: Option<&'static str>, climate: Option<Climate>, distance: Option<RangeInclusive<u32>>, visited: Option<Visited>) { ... }
+        // which locations have I visited?
+        let result = locations.find_robust(None,None,None,Some(Yes));
+        let result2 = locations.find_robust(Some("Calgary"),None,None,Some(Yes));
+    }
 }

@@ -92,14 +92,21 @@ impl Locations {
         // locations is our data store so if it's empty, we know it has to be empty
         // the vec of Location already implements is_empty so we can reuse
     }
-
-    pub fn find(&self, name:&'static str) -> Option<&Location>{
-        self.locations.iter().find(|location|location.name() == name) // Closures / Iters!
+    // enum the types on location somehow?
+    pub fn find(&self, name: &'static str) -> Option<&Location> {
+        self.locations
+            .iter()
+            .find(|search_candidate| { search_candidate.name() == name }) // Callback - designed to GET called back
     }
+    // Commenting out to experiment with an implementation
+    //   pub fn robust_find(&self, ) -> Option<&Location>{
+    //       self.locations.iter().find(|location:&&Location|location)
+    //   }
 
-    pub fn robust_find(&self, ) -> Option<&Location>{
-        self.locations.iter().find(|location:&&Location|location)
-    }
+    //  pub fn robust_find(&self,thing_to_find ) -> Option<&Location>{
+    //      self.locations.iter().find(|[Some(&Location {name, climate, distance, visited})])
+    //     // self.locations.iter().find(Location::|x| {}) // What is this?!
+    //     // self.locations.) // What is this?!
+    //}
+    /
 }
-
-//TODO: Constructors / Accessors for updating

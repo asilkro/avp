@@ -5,6 +5,7 @@ use std::mem::discriminant;
 use crate::avp::*;
 use std::io::{Error as IoError, ErrorKind, Stdin, Read};
 use std::fs;
+use std::ops::RangeInclusive;
 use crate::{avp::climate::Climate, error::Error, avp::visited::Visited, avp};
 use std::ptr::read;
 use serde_yaml::from_slice;
@@ -12,19 +13,18 @@ use crate::avp::climate::Climate::{Cold, Moderate, Warm};
 use crate::avp::visited::Visited::{No, Yes};
 
 #[test]
- fn new__empty_reader_succeeds() {
-     // Given
+fn new__empty_reader_succeeds() {
+    // Given
     let data_being_read = r#""#;
 
-     // When -
-     let result = Locations::new(data_being_read.as_bytes());
+    // When -
+    let result = Locations::new(data_being_read.as_bytes());
 
-     // Then
-     // Unwrap for test only, plz no ship
-     assert!(result.is_ok(), "{:?}", result);
-     assert!(result.unwrap().is_empty());
-
- }
+    // Then
+    // Unwrap for test only, plz no ship
+    assert!(result.is_ok(), "{:?}", result);
+    assert!(result.unwrap().is_empty());
+}
 
 #[test]
 fn new__invalid_data_returns_error() {
@@ -79,7 +79,7 @@ fn getters_can_get_visited() {
 
     // When
     let result = location.visited();
-    
+
     // Then
     assert_eq!(result, expected_result);
 }
@@ -105,7 +105,7 @@ fn setters_can_set_visited() {
 }
 
 #[test] /// Get climate from data
-fn getters_can_get_climate(){
+fn getters_can_get_climate() {
     // Given a location, initialized with a Warm as climate, determine if getter can accurately reflect
     let expected_result = Warm;
     let location_setup_data = r#"---
@@ -123,8 +123,9 @@ fn getters_can_get_climate(){
     // Then
     debug_assert_eq!(result, expected_result);
 }
+
 #[test] /// Set Climate
-fn setters_can_set_climate(){
+fn setters_can_set_climate() {
     // Given setup values, can an updated location modify the setup value for climate
     let expected_result = Cold;
     let location_setup_data = r#"---
@@ -141,10 +142,10 @@ fn setters_can_set_climate(){
 
     // Then
     assert_eq!(expected_result, location.climate)
-    }
+}
 
 #[test] /// Distance next
-fn getters_can_get_distance(){
+fn getters_can_get_distance() {
     // Given a location, initialized with 500 as distance, determine if getter can accurately reflect
     let expected_result = 500;
     let location_setup_data = r#"---
@@ -178,7 +179,7 @@ fn getters_can_get_distance(){
 //}
 
 #[test] // How do we want to access location
-fn first_location_accessor(){
+fn first_location_accessor() {
     // Given a Locations
     let data = r#"---
         name: "Another Name"
@@ -207,6 +208,17 @@ fn first_location_accessor(){
     #[test] // Robust find can use any parameter, this tests with Visited
     fn robust_find_can_use_visited() {
         // Given
+        let location_setup_data = r#"---
+    locations:
+      - name: "Some Name"
+        climate: Cold
+        distance: 250
+        visited: No
+      - name: "Another Name"
+        climate: Warm
+        distance: 500
+        visited: Yes"#.as_bytes();
+        let locations = Locations::new(location_setup_data).unwrap();
 
         // When
         // name, climate, distance, name
@@ -215,7 +227,16 @@ fn first_location_accessor(){
         // future code looks like
         fn find_robust(&self, name: Option<&'static str>, climate: Option<Climate>, distance: Option<RangeInclusive<u32>>, visited: Option<Visited>) { ... }
         // which locations have I visited?
-        let result = locations.find_robust(None,None,None,Some(Yes));
-        let result2 = locations.find_robust(Some("Calgary"),None,None,Some(Yes));
+        let result = locations.find_robust(None, None, None, Some(Yes));
+        let result2 = locations.find_robust(Some("Calgary"), None, None, Some(Yes));
+    }
+
+    #[test]
+    fn find_can_search_for_more_than_name() {
+        // Given
+
+        // When
+
+        // Then
     }
 }

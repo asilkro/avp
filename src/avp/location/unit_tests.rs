@@ -9,7 +9,7 @@ use std::ops::RangeInclusive;
 use crate::{avp::climate::Climate, error::Error, avp::visited::Visited, avp};
 use std::ptr::read;
 use serde_yaml::from_slice;
-use crate::avp::climate::Climate::{Cold, Moderate, Warm};
+use crate::avp::climate::Climate::{Cold, Hot, Moderate, Warm};
 use crate::avp::visited::Visited::{No, Yes};
 
 #[test]
@@ -234,9 +234,27 @@ fn first_location_accessor() {
     #[test]
     fn find_can_search_for_more_than_name() {
         // Given
-        let value_to_search = Warm;
+        let location_setup_data = r#"---
+    locations:
+      - name: "Some Name"
+        climate: Cold
+        distance: 250
+        visited: No
+      - name: "Another Name"
+        climate: Warm
+        distance: 500
+        visited: Yes"#.as_bytes();
+        let locations = Locations::new(location_setup_data).unwrap();
+
+        let climate_value_to_search = Cold;
+        let visited_value_to_search = Yes;
+
         // When
+        let found_climate_value = Hot; // Finish making test
+        let found_visited_value = No; // Will pass but fail will happen before
 
         // Then
+        assert_eq!(found_climate_value, climate_value_to_search);
+        assert_eq!(found_visited_value, climate_value_to_search);
     }
 }

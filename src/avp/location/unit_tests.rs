@@ -205,31 +205,31 @@ fn first_location_accessor() {
     // Then
     assert_eq!(result, Some(&expected_result));
 
-    #[test] // Robust find can use any parameter, this tests with Visited
-    fn robust_find_can_use_visited() {
-        // Given
-        let location_setup_data = r#"---
-    locations:
-      - name: "Some Name"
-        climate: Cold
-        distance: 250
-        visited: No
-      - name: "Another Name"
-        climate: Warm
-        distance: 500
-        visited: Yes"#.as_bytes();
-        let locations = Locations::new(location_setup_data).unwrap();
-
-        // When
-        // name, climate, distance, name
-        let result = locations.find_robust("<some_str>", Climate::<some_variant>, 1..=10, Visited::<some_variant>);
-
-        // future code looks like
-        fn find_robust(&self, name: Option<&'static str>, climate: Option<Climate>, distance: Option<RangeInclusive<u32>>, visited: Option<Visited>) { ... }
-        // which locations have I visited?
-        let result = locations.find_robust(None, None, None, Some(Yes));
-        let result2 = locations.find_robust(Some("Calgary"), None, None, Some(Yes));
-    }
+  //  #[test] // Robust find can use any parameter, this tests with Visited
+  //  fn robust_find_can_use_visited() {
+  //      // Given
+  //      let location_setup_data = r#"---
+  //  locations:
+  //    - name: "Some Name"
+  //      climate: Cold
+  //      distance: 250
+  //      visited: No
+  //    - name: "Another Name"
+  //      climate: Warm
+  //      distance: 500
+  //      visited: Yes"#.as_bytes();
+  //      let locations = Locations::new(location_setup_data).unwrap();
+//
+  //      // When
+  //      // name, climate, distance, name
+  //      let result = locations.find_robust("<some_str>", Climate::<some_variant>, 1..=10, Visited::<some_variant>);
+//
+  //      // future code looks like
+  //      fn find_robust(&self, name: Option<&'static str>, climate: Option<Climate>, distance: Option<RangeInclusive<u32>>, visited: Option<Visited>) { ... }
+  //      // which locations have I visited?
+  //      let result = locations.find_robust(None, None, None, Some(Yes));
+  //      let result2 = locations.find_robust(Some("Calgary"), None, None, Some(Yes));
+  //  }
 
     #[test]
     fn find_can_search_for_more_than_name() {
@@ -246,8 +246,8 @@ fn first_location_accessor() {
         visited: Yes"#.as_bytes();
         let locations = Locations::new(location_setup_data).unwrap();
 
-        let climate_value_to_search = Cold;
-        let visited_value_to_search = Yes;
+        let climate_value_to_search = Cold; // Simulating input for Cold
+        let visited_value_to_search = Yes; // Simulating input for Yes
 
         // When
         let found_climate_value = Hot; // Finish making test
@@ -255,6 +255,6 @@ fn first_location_accessor() {
 
         // Then
         assert_eq!(found_climate_value, climate_value_to_search);
-        assert_eq!(found_visited_value, climate_value_to_search);
+        assert_eq!(found_visited_value, visited_value_to_search);
     }
 }

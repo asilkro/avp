@@ -108,5 +108,4 @@ impl Locations {
     //     // self.locations.iter().find(Location::|x| {}) // What is this?!
     //     // self.locations.) // What is this?!
     //}
-    /
 }

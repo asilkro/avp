@@ -251,7 +251,8 @@ fn first_location_accessor() {
 
         // When
         let found_climate_value = Hot; // Finish making test
-        let found_visited_value = No; // Will pass but fail will happen before
+        let found_visited_value = Yes; // Will pass but fail will happen before
+        // Test works, now to implement
 
         // Then
         assert_eq!(found_climate_value, climate_value_to_search);

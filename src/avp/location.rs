@@ -75,7 +75,7 @@ impl Locations {
             _ => serde_yaml::from_slice(data.as_ref())?,
         };
         Ok(locs)
-    // pub fn modify_location
+        // pub fn modify_location
     }
 
     // TODO: I want a way to open a thing; we already have new ^^ above but I want something else to implement read.
@@ -83,7 +83,6 @@ impl Locations {
     //
     // pub fn open()
     // }
-
 
 
     #[allow(dead_code)]
@@ -102,10 +101,4 @@ impl Locations {
     //   pub fn robust_find(&self, ) -> Option<&Location>{
     //       self.locations.iter().find(|location:&&Location|location)
     //   }
-
-      pub fn robust_find(&self,thing_to_find ) -> Option<Some(&Location>,None)>{
-          self.locations.iter().find(|[Some(&Location {name, climate, distance, visited})])
-         // self.locations.iter().find(Location::|x| {}) // What is this?!
-         // self.locations.) // What is this?!
-    }
 }

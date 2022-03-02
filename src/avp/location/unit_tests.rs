@@ -204,35 +204,10 @@ fn first_location_accessor() {
 
     // Then
     assert_eq!(result, Some(&expected_result));
+}
 
-  //  #[test] // Robust find can use any parameter, this tests with Visited
-  //  fn robust_find_can_use_visited() {
-  //      // Given
-  //      let location_setup_data = r#"---
-  //  locations:
-  //    - name: "Some Name"
-  //      climate: Cold
-  //      distance: 250
-  //      visited: No
-  //    - name: "Another Name"
-  //      climate: Warm
-  //      distance: 500
-  //      visited: Yes"#.as_bytes();
-  //      let locations = Locations::new(location_setup_data).unwrap();
-//
-  //      // When
-  //      // name, climate, distance, name
-  //      let result = locations.find_robust("<some_str>", Climate::<some_variant>, 1..=10, Visited::<some_variant>);
-//
-  //      // future code looks like
-  //      fn find_robust(&self, name: Option<&'static str>, climate: Option<Climate>, distance: Option<RangeInclusive<u32>>, visited: Option<Visited>) { ... }
-  //      // which locations have I visited?
-  //      let result = locations.find_robust(None, None, None, Some(Yes));
-  //      let result2 = locations.find_robust(Some("Calgary"), None, None, Some(Yes));
-  //  }
-
-    #[test]
-    fn find_can_search_for_more_than_name() {
+    /*  #[test] // Robust find can use any parameter, this tests with Visited
+    fn robust_find_can_use_visited() {
         // Given
         let location_setup_data = r#"---
     locations:
@@ -245,17 +220,98 @@ fn first_location_accessor() {
         distance: 500
         visited: Yes"#.as_bytes();
         let locations = Locations::new(location_setup_data).unwrap();
+//
+        // When
+        // name, climate, distance, name
+        let result = locations.find_robust("<some_str>", Climate::<some_variant>, 1..=10, Visited::<some_variant>);
+//
+        // future code looks like
+        fn find_robust(&self, name: Option<&'static str>, climate: Option<Climate>, distance: Option<RangeInclusive<u32>>, visited: Option<Visited>) { ... }
+        // which locations have I visited?
+        let result = locations.find_robust(None, None, None, Some(Yes));
+        let result2 = locations.find_robust(Some("Calgary"), None, None, Some(Yes));
+    } */
 
-        let climate_value_to_search = Cold; // Simulating input for Cold
-        let visited_value_to_search = Yes; // Simulating input for Yes
+#[test]
+fn find_can_use_visited() {
+        // Given
+        let location_setup_data = r#"---
+    locations:
+      - name: "Some Name"
+        climate: Cold
+        distance: 250
+        visited: No
+      - name: "Another Name"
+        climate: Warm
+        distance: 500
+        visited: Yes"#.as_bytes();
+        let locations = Locations::new(location_setup_data).unwrap();
+        let search_data = r#"---
+        name: "Another Name"
+        climate: Warm
+        distance: 500
+        visited: Yes"#.as_bytes();
+        let expected_result = serde_yaml::from_slice(search_data.as_ref()).unwrap();
 
         // When
-        let found_climate_value = Hot; // Finish making test
-        let found_visited_value = Yes; // Will pass but fail will happen before
-        // Test works, now to implement
+        let result = locations.find(Yes); // find only knows name
 
         // Then
-        assert_eq!(found_climate_value, climate_value_to_search);
-        assert_eq!(found_visited_value, visited_value_to_search);
+        assert_eq!(result, Some(&expected_result));
     }
+
+#[test]
+fn find_can_use_climate() {
+    // Given
+    let location_setup_data = r#"---
+    locations:
+      - name: "Some Name"
+        climate: Cold
+        distance: 250
+        visited: No
+      - name: "Another Name"
+        climate: Warm
+        distance: 500
+        visited: Yes"#.as_bytes();
+    let locations = Locations::new(location_setup_data).unwrap();
+    let search_data = r#"---
+        name: "Another Name"
+        climate: Warm
+        distance: 500
+        visited: Yes"#.as_bytes();
+    let expected_result = serde_yaml::from_slice(search_data.as_ref()).unwrap();
+
+        // When
+    let result = locations.find(Warm); // find only knows name
+
+        // Then
+    assert_eq!(result, Some(&expected_result));
+}
+
+#[test]
+fn find_can_use_distance() {
+    // Given
+    let location_setup_data = r#"---
+locations:
+  - name: "Some Name"
+    climate: Cold
+    distance: 250
+    visited: No
+  - name: "Another Name"
+    climate: Warm
+    distance: 500
+    visited: Yes"#.as_bytes();
+    let locations = Locations::new(location_setup_data).unwrap();
+    let search_data = r#"---
+    name: "Another Name"
+    climate: Warm
+    distance: 500
+    visited: Yes"#.as_bytes();
+    let expected_result = serde_yaml::from_slice(search_data.as_ref()).unwrap();
+
+    // When
+    let result = locations.find(500); // find only knows name
+
+    // Then
+    assert_eq!(result, Some(&expected_result));
 }

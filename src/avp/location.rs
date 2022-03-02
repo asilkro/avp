@@ -103,9 +103,9 @@ impl Locations {
     //       self.locations.iter().find(|location:&&Location|location)
     //   }
 
-    //  pub fn robust_find(&self,thing_to_find ) -> Option<&Location>{
-    //      self.locations.iter().find(|[Some(&Location {name, climate, distance, visited})])
-    //     // self.locations.iter().find(Location::|x| {}) // What is this?!
-    //     // self.locations.) // What is this?!
-    //}
+      pub fn robust_find(&self,thing_to_find ) -> Option<Some(&Location>,None)>{
+          self.locations.iter().find(|[Some(&Location {name, climate, distance, visited})])
+         // self.locations.iter().find(Location::|x| {}) // What is this?!
+         // self.locations.) // What is this?!
+    }
 }

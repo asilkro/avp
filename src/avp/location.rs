@@ -92,24 +92,39 @@ impl Locations {
         // the vec of Location already implements is_empty so we can reuse
     }
     // enum the types on location somehow?
- //   pub fn find(&self, name: &'static str) -> Option<&Location> {
- //       self.locations
- //           .iter()
- //           .find(|search_candidate| { search_candidate.name() == name }) // Callback - designed to GET called back
- //   }
+    //   pub fn find(&self, name: &'static str) -> Option<&Location> {
+    //       self.locations
+    //           .iter()
+    //           .find(|search_candidate| { search_candidate.name() == name }) // Callback - designed to GET called back
+    //   }
     // Commenting out to experiment with an implementation
     //   pub fn robust_find(&self, ) -> Option<&Location>{
     //       self.locations.iter().find(|location:&&Location|location)
     //   }
-    pub fn find_name(&self, name: &'static str) -> Option<&Location> {
+    pub fn find_name(&self, name: &'static str) -> Option<&Location> { //'static = lifetime
         self.locations
             .iter()
             .find(|search_candidate| // Predicate
-                search_candidate.name() == name// Callback - designed to GET called back
+                      search_candidate.name() == name// Callback - designed to GET called back
             ) // Option has to return a Some if found or None if not
     }
 
-    pub fn find_climate(){
+    pub fn find_climate() {}
+    // Messing with match:
+    pub fn find_stuff(&self, name: &str, climate: &climate, distance: &u32, visited: &visited) -> Option<&Location>
+    {
+        self.locations
+            .iter()
+            .find(|search_candidate| // Predicate
+                      search_candidate.name() == name// Callback - designed to GET called back
+            );// Option has to return a Some if found or None if not
 
+        match self.locations {
+            Locations::find_name() => Some(unimplemented!()),
+            Locations::find_climate() => Some(climate),
+            Locations::find_distance() => Some(unimplemented!()),
+            Locations::find_visited() => Some(unimplemented!()),
+            _ => none
+        }
     }
 }

@@ -109,22 +109,37 @@ impl Locations {
             ) // Option has to return a Some if found or None if not
     }
 
-    pub fn find_climate() {}
+    pub fn find_climate() {
+        unimplemented!()
+    } // TODO
+
+    pub fn find_distance() {
+        unimplemented!()
+    } // TODO
+
+    pub fn find_visited() {
+        unimplemented!()
+    } // TODO
+
     // Messing with match:
     pub fn find_stuff(&self, name: &str, climate: &climate, distance: &u32, visited: &visited) -> Option<&Location>
     {
         self.locations
             .iter()
             .find(|search_candidate| // Predicate
-                      search_candidate.name() == name// Callback - designed to GET called back
+                      search_candidate.name() == name,
+                  search_candidate.climate() == climate,
+                  search_candidate.distance() == distance,
+                  search_candidate.visited() == visited,
             );// Option has to return a Some if found or None if not
 
         match self.locations {
-            Locations::find_name() => Some(unimplemented!()),
-            Locations::find_climate() => Some(climate),
-            Locations::find_distance() => Some(unimplemented!()),
-            Locations::find_visited() => Some(unimplemented!()),
-            _ => none
+            //        Locations::find_name() => Some(unimplemented!()),
+            //        Locations::find_climate() => Some(unimplemented!()),
+            //        Locations::find_distance() => Some(unimplemented!()),
+            //        Locations::find_visited() => Some(unimplemented!()),
+            Locations::find_stuff() => Some(Location), // This should use itself?
+            _ => None
         }
     }
 }

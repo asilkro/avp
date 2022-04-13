@@ -45,8 +45,8 @@ impl Location {
     }
 }
 
-//YAGNI - You ain't gonna need it
-//DRY - Don't Repeat Yourself
+/// YAGNI - You ain't gonna need it
+/// DRY - Don't Repeat Yourself
 
 #[derive(Debug, Serialize, Deserialize, PartialEq)]
 pub struct Locations {

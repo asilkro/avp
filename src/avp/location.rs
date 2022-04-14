@@ -109,17 +109,17 @@ impl Locations {
             ) // Option has to return a Some if found or None if not
     }
 
-    pub fn find_climate() {
-        unimplemented!()
-    } // TODO
+    //  pub fn find_climate() {
+    //      unimplemented!()
+    //  } // TODO
 
-    pub fn find_distance() {
-        unimplemented!()
-    } // TODO
+    //  pub fn find_distance() {
+    //      unimplemented!()
+    //  } // TODO
 
-    pub fn find_visited() {
-        unimplemented!()
-    } // TODO
+    //  pub fn find_visited() {
+    //      unimplemented!()
+    //  } // TODO
 
     // Messing with match:
     pub fn find_stuff(&self, name: &str, climate: &climate, distance: &u32, visited: &visited) -> Option<&Location>
